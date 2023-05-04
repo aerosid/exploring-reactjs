@@ -1,0 +1,13 @@
+.cache
+.dotnet
+.gnupg
+.npm
+.ssh
+.vscode-server
+portfolio-old
+
+.git-credentials
+.bash_history
+.bashrc
+.gitconfig
+.profile

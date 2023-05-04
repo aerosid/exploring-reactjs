@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>delete-me.html</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      class Job {
+        constructor(name, period) {
+          this.name = name;
+          Number.isInteger(period) ? this.period = period : this.period = 0;
+        }
+        static promise(name, period) {
+          let job = new Job(name, period);
+          return new Promise(job.executor);
+        }
+        executor = (resolve, reject) => {
+          let onTimeout = () => {
+            resolve(this.name);
+          }
+          this.timeout = window.setTimeout(onTimeout, this.period);
+        }
+        getName = () => { return this.name; };
+        getPeriod = () => { return this.period; };
+      }
+      let promise = Job.promise("A", 1000);
+      let onA = (value) => { console.log(value + ": succeeded"); return Job.promise("B", 1000); };
+      let onB = (value) => { console.log(value + ": succeeded"); return Job.promise("C", 1000); };
+      let onC = (value) => { console.log(value + ": succeeded"); return value; };
+      let onDone = () => { console.log("All done"); };
+      let onError = (error) => { console.log(error.message); };
+      promise.then(onA).then(onB).then(onC).catch(onError).finally(onDone);
+    </script>
+    <h1>delete-me.html</h1>
+  </body>
+</html>
+
