@@ -1,13 +1,24 @@
+# folders
 .cache
+.config
 .dotnet
 .gnupg
 .npm
+.pki
 .ssh
 .vscode-server
-portfolio-old
+node_modules
+build
 
+# files
 .git-credentials
 .bash_history
 .bashrc
 .gitconfig
 .profile
+
+
+
+
+
+
