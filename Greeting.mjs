@@ -1,21 +1,22 @@
 class Greeting {
-
-    static build() {
-        var obj = new Greeting();
+    #message;
+    static build(message) {
+        var obj = new Greeting(message);
         return obj;
     }
-
-    constructor() {
-        this.message = "Hello World!";
+    constructor(message) {
+        if (message !== undefined && message !== null) {
+            this.#message = message;
+        } else {
+            this.#message = "Hello World!";
+        }
     }
-
     greeting(value) {
-        this.message = value;
+        this.#message = value;
         return this;
     }
-
     toString() {
-        return this.message;
+        return this.#message;
     }
 }
 export { Greeting };

@@ -1,7 +1,9 @@
 .cache
+.config
 .dotnet
 .gnupg
 .npm
+.pki
 .ssh
 .vscode-server
 portfolio-old
@@ -11,3 +13,7 @@ portfolio-old
 .bashrc
 .gitconfig
 .profile
+
+node_modules
+build
+

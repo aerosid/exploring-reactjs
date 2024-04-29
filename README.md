@@ -49,7 +49,7 @@ import ReactDOM from 'react-dom/client';
 class Message extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {color: "red"};
+    this.state = {color: props.color};
   }
   onClick = (event) => {
     var update = (this.state.color === "red") ? {color: "blue"} : {color: "red"};
@@ -130,16 +130,16 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(<Header color="blue"/>);
 ```
 
-## 4. useState and useEffect
+## 4. useState, useEffect and useCallback
 ```javascript
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import ReactDOM from 'react-dom/client';
 
 function Label(props) {
   const [color, setColor] = useState(props.color);
-  const setup = () => { console.log("setup(): " + color); };
-  const teardown = () => { console.log("teardown(): " + color); };
-  useEffect(() => { setup(); return teardown; }, [color]);
+  const setup = useCallback(() => { console.log("setup(): " + color); }, [color]);
+  const teardown = useCallback(() => { console.log("teardown(): " + color); }, [color]);
+  useEffect(() => { setup(); return teardown; }, [color, setup, teardown]);
   var style = {color: color} ;
   var text = (color === "red") ? "I'm Red!" : "I'm Blue!";
   const onClick = () => {
@@ -434,5 +434,13 @@ root.render(<Provider store={store}><Message/></Provider>);
 ```
 ## Note(s)
 ```bash
+Playwrite: https://github.com/microsoft/playwright
+Installation: https://github.com/microsoft/playwright#manually
+npm i -D @playwright/test
+# install supported browsers
+npx playwright install
+Run Test:
+npx playwrite test
+
 
 ```

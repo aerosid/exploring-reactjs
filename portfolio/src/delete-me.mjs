@@ -31,13 +31,13 @@ class Redux {
     this.#store.subscribe(() => { listener(this.#getState()); });
     return this;
   }
-  #doIncrementCallback = async (props, thunkAPI) => {
-    let value = await Job.promise(props.name, props.period);
+  #doIncrementCallback = async (arg, thunkAPI) => {
+    let value = await Job.promise(arg.name, arg.period);
     return value;
   };
   #doIncrementThunk = createAsyncThunk('default', this.#doIncrementCallback);
-  doIncrement = (props) => {
-    this.#store.dispatch(this.#doIncrementThunk(props));
+  doIncrement = (arg) => {
+    this.#store.dispatch(this.#doIncrementThunk(arg));
     return;
   }
   #getState = () => {
@@ -68,8 +68,8 @@ class Component {
     return;
   }
   onClick = () => {
-    const props = {name: "A", period: 5000};
-    this.#redux.doIncrement(props);
+    const arg = {name: "A", period: 5000};
+    this.#redux.doIncrement(arg);
     return;
   }
 }
